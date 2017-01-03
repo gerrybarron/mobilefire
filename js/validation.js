@@ -270,7 +270,8 @@ $(document).ready(function()
 					//if(response=="ok"){
 					if(response > 0){
 						$("#btn-login").html('&nbsp; Signing in...');
-						setTimeout(' window.location.href = "home.html?usrID='+response+'"; ',4000);
+						//setTimeout(' window.location.href = "home.html?usrID='+response+'"; ',4000);
+						window.location.href = "home.html?usrID="+response;
 					}
 					else{
 									
