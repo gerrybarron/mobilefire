@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FIRE Login</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <!--CSS-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.css" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="css/materialize.css" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="css/mystyle.css" media="screen,projection" />
+  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+  <br>
+  <br>
+  <div class="center container thin green-text text-darken-4">
+    <img src="img/FIRE2.png" class="responsive-img" width="40%">
+    <h1 class="flow-text">Find. Inform. Response. Enhance.</h1> 
+    <div class="divider"></div>
+  </div>
+  <div class="container">
+    <p class="red-text center" id="error"></p>
+    <p class="green-text center" id="sccMsg"></p>
+  </div>
+  <div class="container">
+    <div class="container">
+      
+        <ul class="collapsible popout" data-collapsible="accordion">
+            <li>
+            
+              <div class="collapsible-header active center green-text text-darken-4"><i class=""></i>Sign in</div>
+              <div class="collapsible-body container">
+              <form id="login-form" method="post" name="myform">
+                <div class="input-field">
+                  <i class="fa fa-user prefix"></i>
+                  <input id="usrnm" type="email" class="validate" name="username" placeholder="Email">
+                </div>
+                <div class="input-field">
+                  <i class="fa fa-key prefix"></i>
+                  <input id="psswrd" type="password" class="validate" name="password" placeholder="Password">
+                </div>
+                <button id="btn-login" type="submit" name="login" value="Sign in" class="waves-effect waves-light btn block green darken-4">Sign in</button>
+
+                <br>
+                <br>
+                <div class="center">
+                  <a href="" style="">Forgot my password</a>
+                </div>
+                <br>
+                </form>  
+              </div>
+               
+            </li>
+            <li>
+            
+              <div class="collapsible-header active center green-text text-darken-4"><i class=""></i>Sign up</div>
+              <div class="collapsible-body container">
+              <form id="singup-form" method="post" name="myform">
+                <div class="input-field">
+                  <i class="fa fa-user prefix"></i>
+                  <input id="usrnm2" type="email" class="validate" name="username2" placeholder="Email">
+                </div>
+                <div class="input-field">
+                  <i class="fa fa-key prefix"></i>
+                  <input id="psswrd2" type="password" class="validate" name="password2" placeholder="Password">
+                </div>
+                <div class="input-field">
+                  <i class="fa fa-key prefix"></i>
+                  <input id="psswrd3" type="password" class="validate" name="password3" placeholder="Re-enter password">
+                </div>
+                <a id="btn-signup" name="login" class="waves-effect waves-light btn block green darken-4" onclick="signupform()">Sign up</a>
+                <br>
+                <br>
+                </form>
+
+              </div>
+              
+            </li>
+            
+          </ul>
+      
+    </div>
+      
+    <br>
+    <br>
+    
+  </div>
+  
+
+  <!--JS-->
+  <script type="text/javascript" src="js/validation.min.js"></script>
+  <script type="text/javascript" src="js/validation.js"></script>
+  
+  <script type="text/javascript" src="js/materialize.js"></script>
+  <script type="text/javascript" src="js/init.js"></script>
+</body>
+</html>

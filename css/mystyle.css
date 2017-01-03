@@ -1,0 +1,209 @@
+.btn-move-up{
+  position: relative;
+  top: -40px;
+  right: -18px;
+  margin-right: 10px !important;
+}
+.nav-hide{
+  background-color: transparent;
+}
+.parallax-container {
+      height: 250px;
+    }
+.text-shadow{
+	text-shadow:2px 2px 2px #212121;
+}
+.block{
+	width: 100%;
+}
+.minText {
+	font-size: 10px;
+}
+nav .brand-logo {
+  font-size: 2.0rem;
+}
+.maxText {
+	font-size: 18px;
+	font-weight: bold;
+}
+.bold {
+	font-weight: bold;
+	font-size: 18px;
+}
+.midnight-blue {
+	background-color: #2c3e50 !important;
+	color: #ffffff;
+}
+.midnight-blue-text {
+	color: #2c3e50 !important;
+}
+.btn-superlarge {
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.btn-superlarge:hover {
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.btn-superlarge {
+	border: none;
+  	border-radius: 2px;
+  	display: inline-block;
+  	height: 100px;
+  	width: 100%;
+  	line-height: 36px;
+  	outline: 0;
+  	padding: 0 2rem;
+  	text-transform: uppercase;
+  	vertical-align: middle;
+  	-webkit-tap-highlight-color: transparent;
+}
+table.highlight > tbody > tr:hover {
+  background-color: #e0f7fa;
+  color: #006064;
+}
+.divider-head {
+  height: 3px;
+  overflow: hidden;
+  background-color: #e0e0e0;
+}
+.container div.row.border {
+  border-style:solid;
+  border-width: 1px;
+  border-color: #009688;
+}
+.header-with-padding {
+  margin:0px;
+  padding:6px;
+}
+.padding-left-right {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.txt-shdw{
+  text-shadow: 4px 3px 0 #3d3d66,9px 8px 0 rgba(0,0,0,0.15);
+}
+
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #1b5e20 !important;
+   }
+   .input-field input[type=password]:focus + label {
+     color: #1b5e20 !important;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+    color: #1b5e20 !important;
+     border-bottom: 1px solid #1b5e20;
+     box-shadow: 0 1px 0 0 #1b5e20;
+   }
+   .input-field input[type=password]:focus {
+    color: #1b5e20 !important;
+     border-bottom: 1px solid #1b5e20;
+     box-shadow: 0 1px 0 0 #1b5e20;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   .input-field input[type=password].valid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   .input-field input[type=password].invalid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #1b5e20 !important;
+   }
+   @media only screen and (min-width: 960px) {
+  .flow-text {
+    font-size: 2rem;
+  }
+  }
+  #map{
+    height: 100px;
+    width: 100%;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .hideme{
+    display:none;
+  }
+  #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+.chips:hover {
+  cursor: text;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.card-panel{
+  width: 100%;
+}
+.collapsible-nav {
+  border-top: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  margin: 0 0 1rem 0;
+  display: block;
+  position: fixed;
+  height: auto;
+  width: 100%;
+  z-index: 997;
+}
+.no-shadow{
+  box-shadow: none;
+}
+.no-border{
+  border: 0px;
+}
+.rotate{
+    -moz-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+.rotate.down{
+    -ms-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+span.badge {
+  min-width: 3rem;
+  padding: 0 6px;
+  margin-left: 14px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: inherit;
+  color: #757575;
+  float: right;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.modal .modal-content {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.modal-fixed{
+  height: 70%;
+}
