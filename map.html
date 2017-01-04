@@ -32,10 +32,14 @@
   
   
   <script type="text/javascript" src="js/init.js"></script>
+  
+  <script type="text/javascript" src="js/Chart.bundle.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="js/test.js"></script>
   <script src="js/mapmobile.js"></script>
   <script type="text/javascript" src="js/materialize.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAOSrVBmfLfJNg2hdGZ14PCaMSRt5jAqn4&callback=initMap" async defer></script>
-  <script type="text/javascript">
+  <!--script type="text/javascript">
     var vLat=0, vLong=0, map;
 var arrayDevice=[], aryHum=[], aryTemp=[], aryGas=[], aryLat=[], aryLong=[], markers=[],aryLoc=[];
 var marker, i, vicon;
@@ -49,7 +53,7 @@ $(document).ready(function()
     //vLat =aryLat[0]; vLong =aryLong[0];
     
    
-    getDevices(); //use to get Devices from API
+   
     getDeviceStatus(); //use to get Status of devices from dweet.io
     //start = aryLat[0]+", "+aryLong[0];
     //document.getElementById("dStart").value = start;

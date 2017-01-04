@@ -61,7 +61,7 @@ function getDeviceStatus(){
 function getDevices(){
       $.ajax({
       type: "GET",
-      url: "http://iligtas.ph/deviceapi/index.php",
+      url: "http://www.grand-pillar.com/uploads/fire/api.php",
       async: false,
       success: function(deviceData){
           //console.log(deviceData);
@@ -223,14 +223,14 @@ function initMap() {
 // Adds a marker to the map and push to the array.
 function addMarker(location) {
   for(i=0; i<arrayDevice.length; i++){
-    if (aryHum[i]>=60 && aryTemp[i]<=30 && aryGas[i]<=50) {
+    if (aryHum[i]>=50 && aryTemp[i]<=32 && aryGas[i]<=50) {
           vicon = "img/normal-small-size.png";
           //directionsDisplay.setMap(null);
       }
-      else if(aryHum[i]<=60 && aryTemp[i]<=30 && aryGas[i]<=50){
+      else if(aryHum[i]<=50 && aryTemp[i]<=32 && aryGas[i]<=50){
           vicon = "img/alert-small-size.png";
       }
-      else if(aryHum[i]<=60 && aryTemp[i]>=30 && aryGas[i]<=50){
+      else if(aryHum[i]<=50 && aryTemp[i]>=32 && aryGas[i]<=50){
           vicon = "img/danger-small-size.png";
    
             //document.getElementById("dEnd").value = '14.818181, 120.283168';

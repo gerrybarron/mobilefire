@@ -1,3 +1,4 @@
+var vLat=0, vLong=0, map;
 var arrayDevice=[], aryHum=[], aryTemp=[], aryGas=[], aryLat=[], aryLong=[], markers=[],aryLoc=[],aryTstamp=[];
 var ctx = document.getElementById("myChart");
 var ctx2 = document.getElementById("myChart2");
@@ -59,12 +60,12 @@ $(document).ready(function()
             $("#u-email").text(result.fld_email);
             $("#u-name").text(result.fld_name);
             valpass = result.fld_password;
-            $('#stu_pic').attr('src', "img/"+result.fld_pic);
-            $('#user_pic').attr('src', "img/"+result.fld_pic);
-            if (result.fld_pic == null || result.fld_pic == ""){
-                $('#stu_pic').attr('src', "img/user-add.png");
-                $('#user_pic').attr('src', "img/user-add.png");
-            }
+            //$('#stu_pic').attr('src', "http://www.grand-pillar.com/uploads/fire/img/"+result.fld_pic);
+            //$('#user_pic').attr('src', "http://www.grand-pillar.com/uploads/fire/img/"+result.fld_pic);
+            //if (result.fld_pic == null || result.fld_pic == ""){
+              //  $('#stu_pic').attr('src', "img/user-add.png");
+                //$('#user_pic').attr('src', "img/user-add.png");
+            //}
     });
 
     //for Contacts
@@ -95,7 +96,8 @@ $(document).ready(function()
     //getUserStatus();
     getChartData(); //Get and Display Chart Data
     tabledata();
-    getWeatherUpdate()
+    getWeatherUpdate();
+    getDevices();
 });
 
 function tabledata(){
@@ -135,6 +137,22 @@ function getWeatherUpdate(){
         }
     }); //end of ajax function 
 }
+function getDevices(){
+      $.ajax({
+      type: "GET",
+      url: "http://www.grand-pillar.com/uploads/fire/api.php",
+      async: false,
+      success: function(deviceData){
+          //console.log(deviceData);
+          for(var i=0; i<=deviceData.length-1; i++){
+          dvcId = deviceData[i].deviceid;
+          arrayDevice.push(deviceData[i].devicename);
+          }
+
+      }
+    }); //end of ajax function
+}
+
 function getDeviceStatus(){//Start of getDeviceStatus function
     $.ajax({//for devices
         type: "GET",

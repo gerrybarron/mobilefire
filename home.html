@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>F.I.R.E.</title>
-	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+	<meta http-equiv="Content-Security-Policy" content=" default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   	
@@ -56,16 +56,17 @@
 
 	      	<!--Start of Collapsible Body-->
 	      	<div class="collapsible-body white">
+	      	<br>
 	      	<form id="upload-img"  action="upload.php" method="post" enctype="multipart/form-data">
 	      		<div class="row valign-wrapper">
 	      			<div class="col s12 l6 center">
 	      				<br>
 	      				<!--i class="fa fa-user-circle fa-3x" aria-hidden="true"></i-->
-	      				<div class="file-field input-field">
+	      				<!--div class="file-field input-field">
 				            <img src="img/user-add.png" id="stu_pic" style="height:70px;width:70px;" class="circle">
 				            <input type="file" accept="image/*" onchange="readURL(this);" id="u_image" name="picupload">
 				            <input type="hidden" value="" id="hddnval" name="uidd">
-				        </div>
+				        </div-->
 				        <!--input class="btn btn-flat" type="submit" value="save"-->	
 	      				<h6 id="uemail"></h6>
 	      				<br>
@@ -150,15 +151,11 @@
 	    <div class="modal-content">
 	    	<!--Start of col-->
 	    	<div class="col s12">
-	    		<div class="collection with-header" style="margin-top:-2px;margin-bottom:-1px;">
-	    			<div class="file-field input-field collection-header center">
-				        <img src="img/user-add.png" id="user_pic" width="70px" height="70px" class="circle">
-				    </div>
-				</div>
 				<!--Start of Collapsible Parent-->
 				<ul class="collapsible no-shadow" data-collapsible="accordion" style="margin-top:0px;">
 				    <!--Start of First List Item-->
 				    <li>
+				    	<br>
 				      	<div class="collapsible-header blue-grey-text" onclick="Materialize.showStaggeredList('#staggered-manage')">
 				      		<i class="fa fa-user-circle left" aria-hidden="true"></i>
 				      		Manage account
@@ -795,7 +792,7 @@
 				    <br>
 				    <div class="row">
 				    	<div class="col s6 center">
-        					<iframe src="http://iligtas.ph/sys/map.html" width="100%" height="5%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        					<iframe src="map.html" width="100%" height="5%" frameborder="0" style="border:0" allowfullscreen></iframe>
         				</div>
 				    	<div class="col s3 center">
 				    		<i id="hdvcstatusicon" class="fa fa-2x green-text" aria-hidden="true"></i>
