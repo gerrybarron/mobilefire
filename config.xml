@@ -48,6 +48,14 @@
   <!--
     This allows your app to load assets from all *.phongap.com domains
   -->
+  <platform name="android">
+    <icon src="res/icon/android/mdpi.png" qualifier="mdpi" />
+    <icon src="res/icon/android/hdpi.png" qualifier="hdpi" />
+    <icon src="res/icon/android/xhdpi.png" qualifier="xhdpi" />
+    <icon src="res/icon/android/xxhdpi.png" qualifier="xxhdpi" />
+    <icon src="res/icon/android/xxxhdpi.png" qualifier="xxxhdpi" />
+  </platform>
+
   <!--access origin="*" subdomains="true" /-->
   <access origin="*"/>
 
