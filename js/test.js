@@ -29,6 +29,7 @@ document.addEventListener("backbutton", onBackKeyDown, false);
 function onBackKeyDown(e) {
   e.preventDefault();
 }
+
 $(document).ready(function()
 {   
     
@@ -205,7 +206,14 @@ function getDeviceStatus(){//Start of getDeviceStatus function
             
           }
           //}//end of for loop
-            
+        if (0 < aryHum.length) {
+        $( "#dvcstatus" ).removeClass( "red-text" ).addClass( "green-text" );
+        $( "#dvcstatus" ).text("Connected");
+    }
+    else{
+        $( "#dvcstatus" ).removeClass( "green-text" ).addClass( "red-text" );
+        $( "#dvcstatus" ).text("Disconnected");
+    }
         }
     }); //end of ajax function  
     
@@ -234,6 +242,7 @@ function showDeviceStatus(){
                 $( "#dvcDngrTtl" ).text("Danger: Intense Heat");
                 $( "#dvcDngrBdy" ).text("We've detected low in humidity and an increase of temperature.");
                 $('#dvcDanger').modal('open');
+                
             }
             if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
@@ -242,6 +251,7 @@ function showDeviceStatus(){
                 $( "#dvcDngrTtl" ).text("Danger: Smoke Detected");
                 $( "#dvcDngrBdy" ).text("We've detected a small amount of smoke.");
                 $('#dvcDanger').modal('open');
+                
             }
             if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
@@ -250,15 +260,9 @@ function showDeviceStatus(){
                 $( "#dvcDngrTtl" ).text("Danger: Smoke Detected");
                 $( "#dvcDngrBdy" ).text("We've detected a small amount of smoke.");
                 $('#dvcDanger').modal('open');
+                
             }
-            if (0 < aryHum.length) {
-        $( "#dvcstatus" ).removeClass( "red-text" ).addClass( "green-text" );
-        $( "#dvcstatus" ).text("Connected");
-    }
-    else{
-        $( "#dvcstatus" ).removeClass( "green-text" ).addClass( "red-text" );
-        $( "#dvcstatus" ).text("Disconnected");
-    }
+            
 }
 
 //Display data on the chart
