@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>F.I.R.E.</title>
-	<meta http-equiv="Content-Security-Policy" content=" default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+	<!--meta http-equiv="refresh" content="30"-->
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
   	
@@ -28,7 +29,15 @@
 			z-index: 9999;
 			background: url(Preloader_2.gif) center no-repeat #fff;
 		}
+		canvas{
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
     </style>
+    <!-- chartjs -->
+	<script type="text/javascript" src="js/Chart.bundle.js"></script>
+  	<script type="text/javascript" src="js/utils.js"></script>
 
 	<!-- jQuery Library -->
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
@@ -777,7 +786,7 @@
 			    <div class="card-image waves-effect waves-block waves-light">
 			    <h5 class="center light">Status</h5>
 			      <!--img class="activator" src="img/FIRE2.png"-->
-			      	<div style="width:100%" class="activator container">
+			      	<div style="width:100%" class=" container">
     					<canvas id="myChart"></canvas> 
   					</div>
 			    </div>
@@ -811,7 +820,7 @@
 
 			    <div class="card-reveal">
 			      <span class="card-title grey-text text-darken-4">Status<i class="right fa fa-close"></i></span>
-			      <table class="centered">
+			      <table class="centered" id="thisTable">
 					<thead>
 						<tr>
 							<th>Humidity</th>
@@ -841,10 +850,6 @@
 	<br>
 	<!-- Materialize js -->
 	<script type="text/javascript" src="js/materialize.js"></script>
-
-	<!-- chartjs -->
-	<script type="text/javascript" src="js/Chart.bundle.js"></script>
-  	<script type="text/javascript" src="js/utils.js"></script>
 
 	
 	<!-- Some Specific JS codes for Plugin Settings -->

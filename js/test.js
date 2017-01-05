@@ -25,15 +25,13 @@ function getUrlParameter(sParam) {
         }
     }
 };
-
+document.addEventListener("backbutton", onBackKeyDown, false);
+function onBackKeyDown(e) {
+  e.preventDefault();
+}
 $(document).ready(function()
 {   
-    //$("#removeIt").click(function() {
-        //var idrmv = $("#removeIt").closest("li").prop("id");
-        //alert(idrmv);
-        //alert(this.id);
-    //});
-        
+    
     //for Home
     //$.getJSON("server/view.php?uID="+idd, function(result){
     $.getJSON("http://www.grand-pillar.com/uploads/fire/view.php?uID="+idd, function(result){
@@ -92,13 +90,27 @@ $(document).ready(function()
             //<div class='collapsible-body'><div class='row'><div class='col s12'><a id='removeIt' class='red btn block waves-effect waves-light'><i class='fa fa-times right red-text' aria-hidden='true'></i></a></div></div></div>
         };
     });
+    getDeviceName();
     getDeviceStatus(); //Get Status from Dweet.io   
     //getUserStatus();
     getChartData(); //Get and Display Chart Data
     tabledata();
     getWeatherUpdate();
-    getDevices();
+    showDeviceStatus();
+
 });
+setInterval(function(){startRefresh()}, 30000);
+function startRefresh(){
+    aryHum=[];
+    aryTemp=[];
+    aryGas=[];
+    aryTstamp=[];
+    $('#thisTable tbody').html('');
+    getDeviceStatus();   
+    getChartData();
+    tabledata();
+    showDeviceStatus();
+}
 
 function tabledata(){
     for (i = 0; i < aryHum.length; i++) { 
@@ -120,6 +132,8 @@ setInterval(function(){
         $this.fadeIn(500);
     });
 }, 3000);
+
+
 function getWeatherUpdate(){
     $.ajax({
         type: "GET",
@@ -137,7 +151,7 @@ function getWeatherUpdate(){
         }
     }); //end of ajax function 
 }
-function getDevices(){
+/*function getDevices(){
       $.ajax({
       type: "GET",
       url: "http://www.grand-pillar.com/uploads/fire/api.php",
@@ -151,9 +165,9 @@ function getDevices(){
 
       }
     }); //end of ajax function
-}
+}*/
 
-function getDeviceStatus(){//Start of getDeviceStatus function
+function getDeviceName(){
     $.ajax({//for devices
         type: "GET",
         //url: "server/view.php?uDevice="+idd,
@@ -168,6 +182,9 @@ function getDeviceStatus(){//Start of getDeviceStatus function
             }
         }
     }); //end of ajax function  
+}
+
+function getDeviceStatus(){//Start of getDeviceStatus function
     
     $.ajax({
         type: "GET",
@@ -179,8 +196,8 @@ function getDeviceStatus(){//Start of getDeviceStatus function
             aryHum.push(myData.with[i].content.Humidity);
             aryTemp.push(myData.with[i].content.Temperature);
             aryGas.push(myData.with[i].content.Gas);
-            aryLat.push(myData.with[i].content.Latitude);
-            aryLong.push(myData.with[i].content.Longitude);
+            //aryLat.push(myData.with[i].content.Latitude);
+            //aryLong.push(myData.with[i].content.Longitude);
             mydate = new Date(myData.with[i].created);
             //aryTstamp.push(mydate.getHours()+':'+mydate.getMinutes()+':'+mydate.getSeconds());
             aryTstamp.push(mydate.getHours()+':'+mydate.getMinutes()+':'+mydate.getSeconds());
@@ -188,7 +205,14 @@ function getDeviceStatus(){//Start of getDeviceStatus function
             
           }
           //}//end of for loop
-            if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
+            
+        }
+    }); //end of ajax function  
+    
+}//end of getDeviceStatus function
+
+function showDeviceStatus(){
+    if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "green-text fa-check-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "green-text" );
                 $( "#hdvcstatus" ).text("Normal");
@@ -227,9 +251,7 @@ function getDeviceStatus(){//Start of getDeviceStatus function
                 $( "#dvcDngrBdy" ).text("We've detected a small amount of smoke.");
                 $('#dvcDanger').modal('open');
             }
-        }
-    }); //end of ajax function  
-    if (0 < aryHum.length) {
+            if (0 < aryHum.length) {
         $( "#dvcstatus" ).removeClass( "red-text" ).addClass( "green-text" );
         $( "#dvcstatus" ).text("Connected");
     }
@@ -237,7 +259,7 @@ function getDeviceStatus(){//Start of getDeviceStatus function
         $( "#dvcstatus" ).removeClass( "green-text" ).addClass( "red-text" );
         $( "#dvcstatus" ).text("Disconnected");
     }
-}//end of getDeviceStatus function
+}
 
 //Display data on the chart
 function getChartData(){//Start of getChartData function
@@ -271,7 +293,6 @@ function getChartData(){//Start of getChartData function
             }]
         },
         options: {
-            responsive:true,
             tooltips: {
                     mode: 'index',
                     intersect: false,
