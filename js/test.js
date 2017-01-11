@@ -8,6 +8,7 @@ var chartColors = window.chartColors;
 var shwdvcstatus="";
 var idd = getUrlParameter('usrID');
 var valpass;
+//var contentString;
 var counter = 1;
 var homenamestatus,usrzip,usrTemp,userWdecs,userWicon, userGicon;
 
@@ -91,6 +92,7 @@ $(document).ready(function()
             //<div class='collapsible-body'><div class='row'><div class='col s12'><a id='removeIt' class='red btn block waves-effect waves-light'><i class='fa fa-times right red-text' aria-hidden='true'></i></a></div></div></div>
         };
     });
+    getDevices();
     getDeviceName();
     getDeviceStatus(); //Get Status from Dweet.io   
     //getUserStatus();
@@ -106,11 +108,16 @@ function startRefresh(){
     aryTemp=[];
     aryGas=[];
     aryTstamp=[];
+    aryLat=[];
+  aryLong=[];
+  markers=[];
+   clearMarkers();
     $('#thisTable tbody').html('');
     getDeviceStatus();   
     getChartData();
     tabledata();
     showDeviceStatus();
+    addMarker();
 }
 
 function tabledata(){
@@ -152,7 +159,7 @@ function getWeatherUpdate(){
         }
     }); //end of ajax function 
 }
-/*function getDevices(){
+function getDevices(){
       $.ajax({
       type: "GET",
       url: "http://www.grand-pillar.com/uploads/fire/api.php",
@@ -166,7 +173,7 @@ function getWeatherUpdate(){
 
       }
     }); //end of ajax function
-}*/
+}
 
 function getDeviceName(){
     $.ajax({//for devices
@@ -197,8 +204,8 @@ function getDeviceStatus(){//Start of getDeviceStatus function
             aryHum.push(myData.with[i].content.Humidity);
             aryTemp.push(myData.with[i].content.Temperature);
             aryGas.push(myData.with[i].content.Gas);
-            //aryLat.push(myData.with[i].content.Latitude);
-            //aryLong.push(myData.with[i].content.Longitude);
+            aryLat.push(myData.with[i].content.Latitude);
+            aryLong.push(myData.with[i].content.Longitude);
             mydate = new Date(myData.with[i].created);
             //aryTstamp.push(mydate.getHours()+':'+mydate.getMinutes()+':'+mydate.getSeconds());
             aryTstamp.push(mydate.getHours()+':'+mydate.getMinutes()+':'+mydate.getSeconds());
@@ -206,14 +213,13 @@ function getDeviceStatus(){//Start of getDeviceStatus function
             
           }
           //}//end of for loop
-        if (0 < aryHum.length) {
-        $( "#dvcstatus" ).removeClass( "red-text" ).addClass( "green-text" );
-        $( "#dvcstatus" ).text("Connected");
-    }
-    else{
-        $( "#dvcstatus" ).removeClass( "green-text" ).addClass( "red-text" );
-        $( "#dvcstatus" ).text("Disconnected");
-    }
+            if (0 < aryHum.length) {
+                $( "#dvcstatus" ).removeClass( "grey-text" ).addClass( "green-text" );
+                
+            }
+            else{
+                $( "#dvcstatus" ).removeClass( "green-text" ).addClass( "grey-text" );
+            }
         }
     }); //end of ajax function  
     
@@ -223,22 +229,22 @@ function showDeviceStatus(){
     if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "green-text fa-check-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "green-text" );
-                $( "#hdvcstatus" ).text("Normal");
+                
             }
             if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "amber-text fa-bell" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "amber-text" );
-                $( "#hdvcstatus" ).text("Alert");
+                
             }
             if (aryHum[4]>=50 && aryTemp[4]>=32 && aryGas[4]<=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "amber-text fa-bell" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "amber-text" );
-                $( "#hdvcstatus" ).text("Alert");
+                
             }
             if (aryHum[4]<=50 && aryTemp[4]>=32 && aryGas[4]<=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "red-text" );
-                $( "#hdvcstatus" ).text("Danger");
+                
                 $( "#dvcDngrTtl" ).text("Danger: Intense Heat");
                 $( "#dvcDngrBdy" ).text("We've detected low in humidity and an increase of temperature.");
                 $('#dvcDanger').modal('open');
@@ -247,7 +253,7 @@ function showDeviceStatus(){
             if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "red-text" );
-                $( "#hdvcstatus" ).text("Danger");
+                
                 $( "#dvcDngrTtl" ).text("Danger: Smoke Detected");
                 $( "#dvcDngrBdy" ).text("We've detected a small amount of smoke.");
                 $('#dvcDanger').modal('open');
@@ -256,7 +262,7 @@ function showDeviceStatus(){
             if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "red-text" );
-                $( "#hdvcstatus" ).text("Danger");
+                
                 $( "#dvcDngrTtl" ).text("Danger: Smoke Detected");
                 $( "#dvcDngrBdy" ).text("We've detected a small amount of smoke.");
                 $('#dvcDanger').modal('open');
@@ -324,3 +330,235 @@ function getChartData(){//Start of getChartData function
     });//end of myChart
     
 }//End of getChartData function
+
+function initMap() {
+    var firedept = {lat: 14.818181, lng: 120.283168}; 
+    var dlocation = {lat: aryLat[0], lng: aryLong[0]};
+    var styledMapType = new google.maps.StyledMapType(
+            [
+              {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+              {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+              {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+              {
+                featureType: 'administrative',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#c9b2a6'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#dcd2be'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#ae9e90'}]
+              },
+              {
+                featureType: 'landscape.natural',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#93817c'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#a5b076'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#447530'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{color: '#f5f1e6'}]
+              },
+              {
+                featureType: 'road.arterial',
+                elementType: 'geometry',
+                stylers: [{color: '#fdfcf8'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry',
+                stylers: [{color: '#f8c967'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#e9bc62'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry',
+                stylers: [{color: '#e98d58'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#db8555'}]
+              },
+              {
+                featureType: 'road.local',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#806b63'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#8f7d77'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.stroke',
+                stylers: [{color: '#ebe3cd'}]
+              },
+              {
+                featureType: 'transit.station',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#b9d3c2'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#92998d'}]
+              }
+            ],
+            {name: 'Styled Map'});
+    
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 17,
+        center: dlocation,
+        mapTypeId: 'terrain',
+        mapTypeControlOptions: {
+            mapTypeIds: ['styled_map']
+        },
+        fullscreenControl: false,
+        zoomControl: false,
+        streetViewControl: false
+    });
+    //map.setTilt(45);
+    directionsService = new google.maps.DirectionsService;
+    directionsDisplay = new google.maps.DirectionsRenderer;
+    
+    map.mapTypes.set('styled_map', styledMapType);
+    addMarkerFD(firedept);
+    addMarker();
+    
+    map.setMapTypeId('styled_map');
+
+    // Adds a marker at the center of the map.
+}//end of initMap
+
+ function addMarkerFD(location) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        icon: "img/fs-small-size.png"
+    });
+}
+
+// Adds a marker to the map and push to the array.
+function addMarker(location) {
+  //for(i=0; i<arrayDevice.length; i++){
+    if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
+          vicon = "img/normal-small-size.png";
+          //directionsDisplay.setMap(null);
+      }
+      else if(aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]<=50){
+          vicon = "img/alert-small-size.png";
+      }
+      else if (aryHum[4]>=50 && aryTemp[4]>=32 && aryGas[4]<=50) {
+        vicon = "img/alert-small-size.png";
+      }
+      else if(aryHum[4]<=50 && aryTemp[4]>=32 && aryGas[4]<=50){
+          vicon = "img/danger-small-size.png";
+      }
+      else if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+        vicon = "img/danger-small-size.png";
+      }
+      else if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+        vicon = "img/danger-small-size.png";
+      }
+      //console.log(aryLat);
+    var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(aryLat[4],aryLong[4]),
+          map: map,
+          icon:vicon  
+      });
+      markers.push(marker); 
+
+      //var infowindow = new google.maps.InfoWindow({
+          //content: contentString
+       // });
+
+      //marker.addListener('click', function() {
+        //  infowindow.open(map, marker);
+        //});
+  //}//forloop
+    
+}//end of addMarkers
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+    setMapOnAll(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+    setMapOnAll(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+    clearMarkers();
+    markers = [];
+}
+
+function setDirection(){
+    calculateAndDisplayRoute(directionsService, directionsDisplay);  
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+        origin: document.getElementById('dStart').value,
+        destination: document.getElementById('dEnd').value,
+        travelMode: 'DRIVING'
+    }, function(response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+}
+
+contentString= "";

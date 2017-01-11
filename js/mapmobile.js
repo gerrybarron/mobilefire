@@ -43,6 +43,7 @@ function getDeviceStatus(){
     //for(var i=0; i<=arrayDevice.length-1; i++){
       $.ajax({
         type: "GET",
+        //url: "https://dweet.io:443/get/latest/dweet/for/gerrybarrontest1",
         url: "https://dweet.io:443/get/latest/dweet/for/gerrybarrontest1",
         async: false,
         success: function(myData){
@@ -68,7 +69,7 @@ function getDevices(){
           for(var i=0; i<=deviceData.length-1; i++){
           dvcId = deviceData[i].deviceid;
           arrayDevice.push(deviceData[i].devicename);
-          aryLoc.push(deviceData[i].owneraddress);
+          //aryLoc.push(deviceData[i].owneraddress);
           }
 
       }
@@ -197,7 +198,9 @@ function initMap() {
         mapTypeId: 'terrain',
         mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain','styled_map']
-        }
+        },
+        fullscreenControl: false,
+        zoomControl: false
     });
     //map.setTilt(45);
     directionsService = new google.maps.DirectionsService;
@@ -230,6 +233,9 @@ function addMarker(location) {
       else if(aryHum[i]<=50 && aryTemp[i]<=32 && aryGas[i]<=50){
           vicon = "img/alert-small-size.png";
       }
+      else if (aryHum[4]>=50 && aryTemp[4]>=32 && aryGas[4]<=50) {
+
+      }
       else if(aryHum[i]<=50 && aryTemp[i]>=32 && aryGas[i]<=50){
           vicon = "img/danger-small-size.png";
    
@@ -239,6 +245,12 @@ function addMarker(location) {
             //document.getElementById("mHead").innerHTML = "Fire threat in " + aryLoc[i];
             //directionsDisplay.setPanel(document.getElementById('panel'));
             //$("#trigmode").trigger("click");
+      }
+      else if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+
+      }
+      else if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+
       }
 
     var marker = new google.maps.Marker({
