@@ -12,6 +12,7 @@ var valpass;
 var counter = 1;
 var homenamestatus,usrzip,usrTemp,userWdecs,userWicon, userGicon;
 
+
 function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -33,7 +34,6 @@ function onBackKeyDown(e) {
 
 $(document).ready(function()
 {   
-    
     //for Home
     //$.getJSON("server/view.php?uID="+idd, function(result){
     $.getJSON("http://www.grand-pillar.com/uploads/fire/view.php?uID="+idd, function(result){
@@ -88,7 +88,7 @@ $(document).ready(function()
            console.log(result)
         for (var i = 0; i<=result.length - 1; i++) {
             $("#parentDiv").append("<li id='removethis'><div class='collapsible-header'>"+result[i].fld_fmname
-                +"<span class='badge grey-text text-lighten-1'>"+result[i].fld_femail+"</span></div></li>");
+                +"<span class='badge grey-text text-lighten-1 hide-on-xsmall-only'>"+result[i].fld_femail+"</span></div></li>");
             //<div class='collapsible-body'><div class='row'><div class='col s12'><a id='removeIt' class='red btn block waves-effect waves-light'><i class='fa fa-times right red-text' aria-hidden='true'></i></a></div></div></div>
         };
     });
@@ -226,22 +226,22 @@ function getDeviceStatus(){//Start of getDeviceStatus function
 }//end of getDeviceStatus function
 
 function showDeviceStatus(){
-    if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
+    if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=65) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "green-text fa-check-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "green-text" );
                 
             }
-            if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
+            if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]<=65) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "amber-text fa-bell" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "amber-text" );
                 
             }
-            if (aryHum[4]>=50 && aryTemp[4]>=32 && aryGas[4]<=50) {
+            if (aryHum[4]>=50 && aryTemp[4]>=32 && aryGas[4]<=65) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "amber-text fa-bell" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "amber-text" );
                 
             }
-            if (aryHum[4]<=50 && aryTemp[4]>=32 && aryGas[4]<=50) {
+            if (aryHum[4]<=50 && aryTemp[4]>=32 && aryGas[4]<=65) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "red-text" );
                 
@@ -250,7 +250,7 @@ function showDeviceStatus(){
                 $('#dvcDanger').modal('open');
                 
             }
-            if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+            if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=65) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "red-text" );
                 
@@ -259,7 +259,7 @@ function showDeviceStatus(){
                 $('#dvcDanger').modal('open');
                 
             }
-            if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+            if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=65) {
                 $( "#hdvcstatusicon" ).removeClass( "red-text green-text amber-text fa-check-circle fa-bell fa-exclamation-circle" ).addClass( "red-text fa-exclamation-circle" );
                 $( "#hdvcstatus" ).removeClass( "red-text green-text amber-text" ).addClass( "red-text" );
                 
@@ -482,23 +482,23 @@ function initMap() {
 // Adds a marker to the map and push to the array.
 function addMarker(location) {
   //for(i=0; i<arrayDevice.length; i++){
-    if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=50) {
+    if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]<=65) {
           vicon = "img/normal-small-size.png";
           //directionsDisplay.setMap(null);
       }
-      else if(aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]<=50){
+      else if(aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]<=65){
           vicon = "img/alert-small-size.png";
       }
-      else if (aryHum[4]>=50 && aryTemp[4]>=32 && aryGas[4]<=50) {
+      else if (aryHum[4]>=50 && aryTemp[4]>=32 && aryGas[4]<=65) {
         vicon = "img/alert-small-size.png";
       }
-      else if(aryHum[4]<=50 && aryTemp[4]>=32 && aryGas[4]<=50){
+      else if(aryHum[4]<=50 && aryTemp[4]>=32 && aryGas[4]<=65){
           vicon = "img/danger-small-size.png";
       }
-      else if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+      else if (aryHum[4]>=50 && aryTemp[4]<=32 && aryGas[4]>=65) {
         vicon = "img/danger-small-size.png";
       }
-      else if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=50) {
+      else if (aryHum[4]<=50 && aryTemp[4]<=32 && aryGas[4]>=65) {
         vicon = "img/danger-small-size.png";
       }
       //console.log(aryLat);

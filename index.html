@@ -1,150 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FIRE Login</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <!--CSS-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.css" media="screen,projection" />
-  <link rel="stylesheet" type="text/css" href="css/materialize.css" media="screen,projection" />
-  <link rel="stylesheet" type="text/css" href="css/mystyle.css" media="screen,projection" />
-  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<title>F.I.R.E.</title>
+	<!--meta http-equiv="refresh" content="30"-->
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  	
+  	<!--CSS-->
+  	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" media="screen,projection" />
+	<link rel="stylesheet" type="text/css" href="css/materialize.css" media="screen,projection" />
+	<link rel="stylesheet" type="text/css" href="css/mystyle.css" media="screen,projection" />
+
+	<style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+       .no-js #loader { display: none;  }
+		.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+		.se-pre-con {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+			background: url(Preloader_2.gif) center no-repeat #fff;
+		}
+		canvas{
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+    <!-- chartjs -->
+	<script type="text/javascript" src="js/Chart.bundle.js"></script>
+  	<script type="text/javascript" src="js/utils.js"></script>
+
+	<!-- jQuery Library -->
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+
+	<script>
+		var checkUserID = localStorage.getItem("usrID");
+		if (checkUserID == null || checkUserID == "undefined"){
+	        window.location = "login.html";
+	    }
+	    else {
+	        window.location = "home.html?usrID="+checkUserID;
+	    }
+  		$(window).load(function() {
+			// Animate loader off screen
+			$(".se-pre-con").fadeOut("slow");;
+		});
+  	</script>
+
 </head>
 <body>
-  <br>
-  <br>
-  <div class="center container thin green-text text-darken-4">
-    <img src="img/FIRE2.png" class="responsive-img" width="40%">
-    <h1 class="flow-text">Find. Inform. Response. Enhance.</h1> 
-    <div class="divider"></div>
-  </div>
-  <div class="container">
-    <p class="red-text center" id="error"></p>
-    <p class="green-text center" id="sccMsg"></p>
-  </div>
-  <div class="container">
-    <div class="container">
-      
-        <ul class="collapsible popout" data-collapsible="accordion">
-            <li>
-            
-              <div class="collapsible-header active center green-text text-darken-4"><i class=""></i>Sign in</div>
-              <div class="collapsible-body container">
-              <form id="login-form" method="post" name="myform">
-                <div class="input-field">
-                  <i class="fa fa-user prefix"></i>
-                  <input id="usrnm" type="email" class="validate" name="username" placeholder="Email">
-                </div>
-                <div class="input-field">
-                  <i class="fa fa-key prefix"></i>
-                  <input id="psswrd" type="password" class="validate" name="password" placeholder="Password">
-                </div>
-                <button id="btn-login" type="submit" name="login" value="Sign in" class="waves-effect waves-light btn block green darken-4">Sign in</button>
+	<div class="se-pre-con"></div>
 
-                <br>
-                <br>
-                <div class="center light">
-                  <!--a href="#fgtPass" style="">Trouble signing in?</a-->
-                </div>
-                <br>
-                </form>  
-              </div>
-               
-            </li>
-            <li>
-            
-              <div class="collapsible-header active center green-text text-darken-4"><i class=""></i>Sign up</div>
-              <div class="collapsible-body container">
-              <form id="singup-form" method="post" name="myform">
-                <div class="input-field">
-                  <i class="fa fa-user prefix"></i>
-                  <input id="usrnm2" type="email" class="validate" name="username2" placeholder="Email">
-                </div>
-                <div class="input-field">
-                  <i class="fa fa-key prefix"></i>
-                  <input id="psswrd2" type="password" class="validate" name="password2" placeholder="Password">
-                </div>
-                <div class="input-field">
-                  <i class="fa fa-key prefix"></i>
-                  <input id="psswrd3" type="password" class="validate" name="password3" placeholder="Re-enter password">
-                </div>
-                <a id="btn-signup" name="login" class="waves-effect waves-light btn block green darken-4" onclick="signupform()">Sign up</a>
-                <br>
-                <br>
-                </form>
+	
+	<!-- Materialize js -->
+	<script type="text/javascript" src="js/materialize.js"></script>
 
-              </div>
-              
-            </li>
-            
-          </ul>
-      
-    </div>
-      
-    <br>
-    <br>
-    
-  </div>
-  <!-- Forgot Password -->
-  <div id="fgtPass" class="modal">
-    <ul class="collapsible collapsible-nav no-shadow no-border" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header blue white-text">
-          Recover your account
-          <a href="#!" class=" modal-action modal-close thin white-text right">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-    </ul>
-      <div class="modal-content" style="padding-bottom:0px">
-        <br>
-        <br>
-        <div class="row">
-          <div class="col s12 center">
-            <p class="light">Please enter your email address to recover your password.</p>
-            <form id="acntrvc" method="post" name="acntrvc">
-              <div class="input-field">
-                <input type="text" placeholder="Email Address" name="rcvrEmail" id="rcvrEmail">
-              </div>
-              <a href="#!" id="btn-rcv" onclick="AcntRcvry()" class="btn btn-flat blue white-text block">Continue</a>
-            </form>
-          </div>
-        </div>
-      </div>
-  </div>
-  <!-- Forgot Password -->
-  <div id="rcvry" class="modal">
-    <ul class="collapsible collapsible-nav no-shadow no-border" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header green white-text">
-          Recovery Email Sent
-          <a href="#!" class=" modal-action modal-close thin white-text right">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </a>
-          </div>
-        </li>
-    </ul>
-      <div class="modal-content" style="padding-bottom:0px">
-        <br>
-        <br>
-        <div class="row">
-          <div class="col s12 center">
-            <p class="light">We have sent an email to your email address to recover your F.I.R.E. account.</p>
-            <br>
-              <a href="#!" onclick="" class="modal-action modal-close btn btn-flat green white-text block">Done</a>
-          </div>
-        </div>
-      </div>
-  </div>
+	
+	<!-- Some Specific JS codes for Plugin Settings -->
+	<script type="text/javascript" src="js/init.js"></script>
+	
+	<!--script src="js/mapchart.js"></script-->
+	
+	<!-- Google Map API -->
+	<!--script async defer src="http://maps.google.com/maps/api/js?key=AIzaSyAOSrVBmfLfJNg2hdGZ14PCaMSRt5jAqn4&callback=initMap"></script-->
+	
+	<script src="js/test.js"></script>
+	<script src="js/validation.js"></script>
+	
+	<script type="text/javascript">
+	
+    	function readURL(input) {
+    		
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-  <!--JS-->
-  <script type="text/javascript" src="js/validation.min.js"></script>
-  <script type="text/javascript" src="js/validation.js"></script>
-  
-  <script type="text/javascript" src="js/materialize.js"></script>
-  <script type="text/javascript" src="js/init.js"></script>
+                reader.onload = function (e) {
+                    $('#stu_pic')
+                        .attr('src', e.target.result)
+                        .width(70)
+                        .height(70);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+  	</script>
 </body>
 </html>

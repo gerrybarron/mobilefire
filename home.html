@@ -43,9 +43,15 @@
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 
 	<script>
+		var checkUserID = localStorage.getItem("usrID");
+		if (checkUserID == null || checkUserID == "undefined"){
+	        window.location = "index.html";
+	    }
+	    
   		$(window).load(function() {
 			// Animate loader off screen
 			$(".se-pre-con").fadeOut("slow");;
+
 		});
   	</script>
 
@@ -69,8 +75,8 @@
 	      	<div class="collapsible-body white">
 	      	<br>
 	      	<form id="upload-img"  action="upload.php" method="post" enctype="multipart/form-data">
-	      		<div class="row valign-wrapper">
-	      			<div class="col s12 l6 center">
+	      		<div class="row ">
+	      			<div class="col s12 l6 m6 center">
 	      				<br>
 	      				<!--i class="fa fa-user-circle fa-3x" aria-hidden="true"></i-->
 	      				<!--div class="file-field input-field">
@@ -90,14 +96,14 @@
 	      				</a>
 	      			</div-->
 
-	      			<div class="col s6 l3 center valign">
+	      			<div class="col s6 l3 m3 center ">
 	      				<a href="#actModal" class="waves-effect waves-light blue-grey-text">
 	      					<i class="fa fa-user fa-2x"></i>
 	      					<h6 class="grey-text">Account</h6>
 	      				</a>
 	      			</div>
 
-	      			<div class="col s6 l3 center valign">
+	      			<div class="col s6 l3 m3 center ">
 	      				<a href="#stgModal" class="waves-effect waves-light grey-text">
 	      					<i class="fa fa-cogs fa-2x"></i>
 	      					<h6 class="grey-text">Setting</h6>
@@ -179,7 +185,7 @@
 							    <li>
 							      	<div class="collapsible-header light">
 							      		Name
-							      		<span id="u-name" class="badge">
+							      		<span id="u-name" class="badge hide-on-xsmall-only">
 									         
 							      		</span>
 							      	</div>
@@ -201,7 +207,7 @@
 							    <li>
 							      	<div class="collapsible-header light">
 							      		Email Address
-							      		<span id="u-email" class="badge"></span>
+							      		<span id="u-email" class="badge hide-on-xsmall-only"></span>
 							      	</div>
 							      	<div class="collapsible-body">
 							      		<div class="row">
@@ -225,7 +231,7 @@
 							    <li>
 							      	<div class="collapsible-header light">
 							      		Password
-							      		<span class="badge">*******</span>
+							      		<span class="badge hide-on-xsmall-only">*******</span>
 							      	</div>
 							      	<div class="collapsible-body">
 							      		<div class="row">
@@ -332,7 +338,7 @@
 							    <li>
 							      	<div class="collapsible-header">
 							      		Name
-							      		<span id="h-name" class="badge grey-text text-lighten-1"></span>
+							      		<span id="h-name" class="badge grey-text text-lighten-1 hide-on-xsmall-only"></span>
 							      	</div>
 							      	<div class="collapsible-body">
 							      		<div class="row">
@@ -352,7 +358,7 @@
 							    <li>
 							      	<div class="collapsible-header">
 							        	Address
-							        	<span id="h-address" class="badge grey-text text-lighten-1">
+							        	<span id="h-address" class="badge grey-text text-lighten-1 hide-on-xsmall-only">
 							        	</span>
 							      	</div>
 
@@ -572,7 +578,7 @@
 	    	</div>
 	    </div>
 	    <div class="modal-footer">
-	      <a href="index.html" class=" modal-action modal-close waves-effect waves-red btn-flat center block red white-text">Agree</a>
+	      <a href="login.html" class="modal-action modal-close waves-effect waves-red btn-flat center block red white-text" onclick="clearcache()">Agree</a>
 	    </div>
 	</div>
 	<!--End of Sign out Structure -->

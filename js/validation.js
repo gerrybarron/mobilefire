@@ -271,7 +271,8 @@ $(document).ready(function()
 					if(response > 0){
 						$("#btn-login").html('&nbsp; Signing in...');
 						//setTimeout(' window.location.href = "home.html?usrID='+response+'"; ',4000);
-						window.location.href = "home.html?usrID="+response;
+						localStorage.setItem("usrID", response);
+						window.location.href = "index.html";
 					}
 					else{
 									
@@ -327,4 +328,41 @@ function signupform(){
 		$("#error").fadeOut(5000);
 	}
 	
+}
+
+function AcntRcvry(){
+	var remail = $("#rcvrEmail").val();
+	
+		$.ajax({		
+			type : 'POST',
+			url  : 'sendemail.php',
+			//url  : 'server/signup.php',
+			data : "remail="+remail,
+			beforeSend: function()
+			{	
+				$("#error").fadeOut();
+				$("#btn-rcv").html('<span class=""></span> &nbsp; loading..');
+			},
+			success :  function(response){						
+				if(response > 0){
+						$("#btn-rcv").html('&nbsp; loading...');
+						//setTimeout(' window.location.href = "index.html"; ',4000);
+						$("#sccMsg").text("Signing up success.");
+					}
+				else{
+									
+						$("#error").fadeIn(1000, function(){						
+							$("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; '+response+'.</div>');
+							$("#btn-rcv").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Continue');
+						});
+						console.log(response);
+					}
+				
+			}
+		});
+	
+}
+
+function clearcache(){
+	localStorage.removeItem("usrID");
 }

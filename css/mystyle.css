@@ -207,3 +207,8 @@ span.badge {
 .modal-fixed{
   height: 70%;
 }
+@media only screen and (max-width: 450px) {
+  .hide-on-xsmall-only, .hide-on-xsmall-and-down {
+    display: none !important;
+  }
+}
